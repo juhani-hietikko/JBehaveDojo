@@ -1,4 +1,4 @@
-package com.houston.jbehavedojo;
+package com.houston.jbehavedojo.stories;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
