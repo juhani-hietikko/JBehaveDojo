@@ -4,7 +4,7 @@ Scenario: Initially shows red for pedestrians and green for cars
 Given a crosswalk with traffic lights
 When the traffic lights are switched on
 Then red is shown for pedestrians
-And green for cars
+And green is shown for cars
 
 
 
@@ -14,7 +14,7 @@ Given a crosswalk with traffic lights
 When lights are set green for cars
 And 30 seconds passes
 Then red is shown for pedestrians
-And yellow for cars
+And yellow is shown for cars
 
 
 
@@ -24,7 +24,7 @@ Given a crosswalk with traffic lights
 When lights are set yellow for cars
 And 3 seconds passes
 Then green is shown for pedestrians
-And red for cars
+And red is shown for cars
 
 
 
@@ -34,7 +34,7 @@ Given a crosswalk with traffic lights
 When lights are set red for cars
 And 10 seconds passes
 Then red is shown for pedestrians
-And red-yellow for cars
+And red-yellow is shown for cars
 
 
 
@@ -44,4 +44,4 @@ Given a crosswalk with traffic lights
 When lights are set red-yellow for cars
 And 3 seconds passes
 Then red is shown for pedestrians
-And green for cars
+And green is shown for cars
