@@ -5,24 +5,24 @@ import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
-public class MySteps {
+public class FooBarSteps {
     
-    @Given("I am a pending step")
+    @Given("I is a pending step")
     public void givenIAmAPendingStep() {
       // PENDING
     }
 
-    @Given("I am still pending step")
+    @Given("I is still pending step")
     public void givenIAmStillPendingStep() {
       // PENDING
     }
 
-    @When("a good soul will implement me")
+    @When("a bad soul will implement me")
     public void whenAGoodSoulWillImplementMe() {
       // PENDING
     }
 
-    @Then("I shall be happy")
+    @Then("I should be happy")
     public void thenIShallBeHappy() {
     }
 

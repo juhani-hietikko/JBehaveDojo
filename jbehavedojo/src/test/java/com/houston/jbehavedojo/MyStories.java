@@ -22,6 +22,9 @@ import org.jbehave.core.steps.InstanceStepsFactory;
 import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.ParameterConverters.ExamplesTableConverter;
+import org.junit.runner.RunWith;
+
+import com.houston.jbehavedojo.steps.FooBarSteps;
 import com.houston.jbehavedojo.steps.MySteps;
 
 import static org.jbehave.core.io.CodeLocations.codeLocationFromClass;
@@ -29,6 +32,8 @@ import static org.jbehave.core.reporters.Format.CONSOLE;
 import static org.jbehave.core.reporters.Format.HTML;
 import static org.jbehave.core.reporters.Format.TXT;
 import static org.jbehave.core.reporters.Format.XML;
+
+import de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner;
 
 /**
  * <p>
@@ -38,6 +43,7 @@ import static org.jbehave.core.reporters.Format.XML;
  * Stories are specified in classpath and correspondingly the {@link LoadFromClasspath} story loader is configured.
  * </p> 
  */
+@RunWith(JUnitReportingRunner.class)
 public class MyStories extends JUnitStories {
     
     public MyStories() {
@@ -47,27 +53,14 @@ public class MyStories extends JUnitStories {
 
     @Override
     public Configuration configuration() {
-        Class<? extends Embeddable> embeddableClass = this.getClass();
-        // Start from default ParameterConverters instance
-        ParameterConverters parameterConverters = new ParameterConverters();
-        // factory to allow parameter conversion and loading from external resources (used by StoryParser too)
-        ExamplesTableFactory examplesTableFactory = new ExamplesTableFactory(new LocalizedKeywords(), new LoadFromClasspath(embeddableClass), parameterConverters);
-        // add custom converters
-        parameterConverters.addConverters(new DateConverter(new SimpleDateFormat("yyyy-MM-dd")),
-                new ExamplesTableConverter(examplesTableFactory));
         return new MostUsefulConfiguration()
-            .useStoryLoader(new LoadFromClasspath(embeddableClass))
-            .useStoryParser(new RegexStoryParser(examplesTableFactory)) 
-            .useStoryReporterBuilder(new StoryReporterBuilder()
-                .withCodeLocation(CodeLocations.codeLocationFromClass(embeddableClass))
-                .withDefaultFormats()
-                .withFormats(CONSOLE, TXT, HTML, XML))
-            .useParameterConverters(parameterConverters);
+        .useStoryLoader(new LoadFromClasspath(this.getClass()))  
+        .useStoryReporterBuilder(new StoryReporterBuilder().withDefaultFormats()); 
     }
 
     @Override
     public InjectableStepsFactory stepsFactory() {
-        return new InstanceStepsFactory(configuration(), new MySteps());
+        return new InstanceStepsFactory(configuration(), new MySteps(), new FooBarSteps());
     }
 
     @Override
