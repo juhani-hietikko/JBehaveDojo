@@ -8,6 +8,7 @@ import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
 import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.LoadFromURL;
+import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
 import org.jbehave.core.reporters.Format;
 import org.jbehave.core.reporters.StoryReporterBuilder;
@@ -19,14 +20,7 @@ import com.houston.jbehavedojo.steps.TrafficLightSteps;
 
 import de.codecentric.jbehave.junit.monitoring.JUnitReportingRunner;
 
-/**
- * <p>
- * {@link Embeddable} class to run multiple textual stories via JUnit.
- * </p>
- * <p>
- * Stories are specified in classpath and correspondingly the {@link LoadFromClasspath} story loader is configured.
- * </p> 
- */
+
 @RunWith(JUnitReportingRunner.class)
 public class Stories extends JUnitStories {
     
@@ -49,8 +43,8 @@ public class Stories extends JUnitStories {
 
     @Override
     protected List<String> storyPaths() {
-        //return new StoryFinder().findPaths(codeLocationFromClass(this.getClass()), "**/*.story", "**/excluded*.story");
-        return Arrays.asList("file:///Users/juhani/Documents/workspace/JBehaveDojo/jbehavedojo/src/test/java/com/houston/jbehavedojo/stories/trafficlights.story");
-    }
-        
+        final String STORY_PATH = 
+                "/Users/juhani/Documents/workspace/JBehaveDojo/jbehavedojo/src/test/java/com/houston/jbehavedojo/stories/";
+        return new StoryFinder().findPaths(STORY_PATH, Arrays.asList("*.story"), null, "file://" + STORY_PATH);
+    }       
 }
