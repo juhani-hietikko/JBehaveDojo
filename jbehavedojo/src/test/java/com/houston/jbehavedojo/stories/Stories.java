@@ -3,10 +3,8 @@ package com.houston.jbehavedojo.stories;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jbehave.core.Embeddable;
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
-import org.jbehave.core.io.LoadFromClasspath;
 import org.jbehave.core.io.LoadFromURL;
 import org.jbehave.core.io.StoryFinder;
 import org.jbehave.core.junit.JUnitStories;
