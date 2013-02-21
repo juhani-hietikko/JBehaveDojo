@@ -7,7 +7,6 @@ I want to have traffic lights
 
 Scenario: Initially shows red for pedestrians and green for cars
 
-
 Given a crosswalk with traffic lights
 When the traffic lights are switched on
 Then red is shown for pedestrians
