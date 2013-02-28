@@ -1,8 +1,54 @@
 package com.houston.jbehavedojo.steps;
 
+import org.jbehave.core.annotations.*;
+import static org.junit.Assert.*;
+
 
 public class TrafficLightSteps {
-
+    private TrafficController trafficController;
+    
+    @Given("a crosswalk with traffic lights")
+    public void crossWalk() {
+        trafficController = new TrafficController();
+    }
+    
+    @When("the traffic lights are switched on")
+    public void trafficLightsOn() {
+        trafficController.switchOn();
+    }
+    
+    @Then("$color is shown for pedestrians")
+    public void colorForPedestrians(String color) {
+        assertEquals(color, trafficController.getPedestrianLight().color);
+    }
+    
+    @Then("$color is shown for cars")
+    public void colorForCars(String color) {
+        assertEquals(color, trafficController.getCarLight().color);
+    }
+    
+    @When("lights are set $color for cars")
+    public void colorIsSetForCars(String color) {
+        trafficController.getCarLight().color = color;
+        
+        if (color.equals("red")) {
+            trafficController.getPedestrianLight().color = "green";
+        } else {
+            trafficController.getPedestrianLight().color = "red";
+        }
+    }
+    
+    @When("$time seconds pass")
+    public void timePassed(int time) {
+        trafficController.advance(time);
+        
+    }
+    
+    @When("<time> elapsed")
+    public void timeElapsed(@Named("time")int time)
+    {
+        trafficController.advance(time);
+    }
 }
 
 

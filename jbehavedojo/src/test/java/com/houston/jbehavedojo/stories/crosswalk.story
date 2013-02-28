@@ -54,13 +54,6 @@ And red is shown for cars
 
 
 
-Scenario: 9 seconds after red for cars still shows red for cars
-
-Given a crosswalk with traffic lights
-When lights are set red for cars
-And 9 seconds pass
-Then green is shown for pedestrians
-And red is shown for cars
 
 
 
@@ -91,3 +84,25 @@ When lights are set red-yellow for cars
 And 3 seconds pass
 Then red is shown for pedestrians
 And green is shown for cars
+
+Scenario: 7 seconds after green for pedestrians shows blinking-green for pedestrians
+
+Given a crosswalk with traffic lights
+When lights are set green for pedestrians
+And 7 seconds pass
+Then blinking-green is shown for pedestrians
+And red is shown for cars
+
+
+Scenario: 9 seconds after red for cars still shows red for cars
+
+Given a crosswalk with traffic lights
+When <time> elapsed
+Then car lights are <car>
+And pedestrial lights are <pedestrial>
+
+Examples:
+|time|car|pedestrial|
+|1|red|green|
+|4|red|green|
+|10|green|red|
